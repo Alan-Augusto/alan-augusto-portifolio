@@ -1,0 +1,41 @@
+@import './colors.scss';
+
+:root {
+    --background-color: #{$light-main-background-color};
+    --text-color: #{$light-main-text-color};
+    --secondary-background-color: #{$light-secondary-background-color};
+    --box-shadow: #{$light-box-shadow};
+    --border-radius: #{$border-radius};
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background-color: #000000;
+        --text-color: #ffffff;
+        --secondary-background-color: #303030;
+        --box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        --border-radius: 4px;
+    }
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    background-image: radial-gradient(gray 1px, transparent 0);
+    background-size: 40px 40px;
+    background-position: -19px -19px;
+}
+
+.card {
+    background-color: var(--secondary-background-color);
+    color: var(--text-color);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
+    padding: var(--border-radius);
+}
