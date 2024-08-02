@@ -1,0 +1,65 @@
+@import '../../theme/colors.scss';
+
+.switch {
+    position: relative;
+    height: 1.2rem;
+    width: 12rem;
+    margin: auto;
+    // colocar um background que vai do preto para o branco em degrade
+    background: linear-gradient(to right, #{$dark-main-background-color}, #{$light-main-background-color});
+    border-radius:.6rem;
+    box-shadow: var(--box-shadow);
+}
+
+.switch-label {
+    // border: 1px solid red;
+    font-weight:500;
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 4rem;
+    // line-height: 32px;
+    font-size: .75rem;
+    color: var(--text-color);
+    text-align: center;
+    cursor: pointer;
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-input:checked+.switch-label {
+    color: #FFF;
+    transition: 0.15s ease-out;
+    transition-property: color, text-shadow;
+}
+
+.switch-input:checked+.switch-label-y~.switch-selector {
+    transform: translateX(0%);
+    background-color: #{$dark-main-background-color};
+}
+
+.switch-input:checked+.switch-label-i~.switch-selector {
+    transform: translateX(100%);
+    background-color: #44ad96;
+}
+
+.switch-input:checked+.switch-label-n~.switch-selector {
+    transform: translateX(200%);
+    background-color: #{$light-main-background-color};
+}
+
+
+.switch-selector {
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    left: 0px;
+    display: block;
+    width: 4rem;
+    height: 1.2rem;
+    border-radius: 0.6rem;
+    background-color: #1ab394;
+    transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
