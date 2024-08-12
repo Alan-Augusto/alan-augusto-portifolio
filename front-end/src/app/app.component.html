@@ -1,10 +1,10 @@
 <div>
   Hello!
 
-  <switch-triple/>
+  <switch-triple (onChangeTheme)="setTheme($event)" />
   <!-- Botão para mudar o tema -->
-  <button (click)="toggleTheme()">Toggle Theme</button>
 
+  
   <div class="card">
     <a routerLink="/home">Home</a>
     <br />
