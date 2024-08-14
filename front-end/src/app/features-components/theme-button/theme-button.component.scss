@@ -1,0 +1,28 @@
+@import '../../../styles/theme.scss';
+
+.btn-theme{
+    height: min-content;
+    width: min-content;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &.light{
+        text-shadow: 0px 0px 4px var(--system-primary-color);
+        &:hover{
+            text-shadow: none;
+        }
+    }
+    &.dark{
+        &:hover{
+            //text sadhow sem inclinação
+            text-shadow: 0px 0px 4px var(--system-secondary-color);
+        }
+    }
+
+    &.material-symbols-outlined{
+        font-size: 1rem;
+    }
+}

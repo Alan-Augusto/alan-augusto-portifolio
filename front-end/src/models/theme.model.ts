@@ -66,4 +66,4 @@ export interface Theme {
     };
 }
 
-export type ThemeOptions = 'light' | 'dark' | 'auto'
+export type ThemeOptions = 'light' | 'dark' 

@@ -1,15 +1,4 @@
 <div>
-  Hello!
-
-  <switch-triple (onChangeTheme)="setTheme($event)" />
-  <!-- Botão para mudar o tema -->
-
-  
-  <div class="card">
-    <a routerLink="/home">Home</a>
-    <br />
-    <br />
-    <a routerLink="/about">About</a>
-  </div>
+    <theme-button/>
+    <router-outlet/>
 </div>
-<router-outlet />

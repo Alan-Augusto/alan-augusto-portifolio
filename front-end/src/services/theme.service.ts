@@ -8,7 +8,7 @@ export class ThemeService {
 
   constructor() { }
 
-  theme = signal<'light' | 'dark' | 'auto'>('auto');
+  theme = signal<'light' | 'dark' >('light');
 
   getTheme() :ThemeOptions {
     // const savedTheme = localStorage?.getItem('theme');
@@ -22,21 +22,15 @@ export class ThemeService {
     if (this.theme() === 'light') {
       this.setTheme('dark');
     }
-    else if (this.theme() === 'dark') {
-      this.setTheme('auto');
-    }
     else {
       this.setTheme('light');
     }
 
   }
 
-  setTheme(theme: 'light' | 'dark' | 'auto') {
+  setTheme(theme: 'light' | 'dark') {
     document.body.classList.remove('light-theme', 'dark-theme', 'auto-theme');
-    if (theme === 'auto') {
-      document.body.classList.add('auto-theme');
-    } 
-    else if (theme === 'light') {
+    if (theme === 'light') {
       document.body.classList.add('light-theme');
     } 
     else {

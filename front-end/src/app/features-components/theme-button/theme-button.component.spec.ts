@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SwitchTripleComponent } from './switch-triple.component';
+import { ThemeButtonComponent } from './theme-button.component';
 
-describe('SwitchTripleComponent', () => {
-  let component: SwitchTripleComponent;
-  let fixture: ComponentFixture<SwitchTripleComponent>;
+describe('ThemeButtonComponent', () => {
+  let component: ThemeButtonComponent;
+  let fixture: ComponentFixture<ThemeButtonComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SwitchTripleComponent]
+      imports: [ThemeButtonComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(SwitchTripleComponent);
+    fixture = TestBed.createComponent(ThemeButtonComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
