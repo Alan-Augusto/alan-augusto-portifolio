@@ -1,0 +1,28 @@
+<div class="section-experiences" >
+    @for (experience of data; track $index) {
+        <div class="card job">
+            <h3>{{experience.companyName}}</h3>
+            <strong>{{experience.role}}</strong>
+            <p>{{experience.description}}</p>
+            <div class="job-date">
+                <span class="material-symbols-outlined">calendar_month</span>
+                <p>{{experience.startDate}} - {{experience.endDate}}</p>
+            </div>
+            @if(experience.stacks.length>0) {
+                <p>Tecnologias utilizadas:</p>
+                <div class="stack-list">
+                    @for (stack of experience.stacks; track $index) {
+                        <div class="stack-item">
+                            <img src="{{getStack(stack)?.logo}}"/>
+                            <!-- <p class="">{{getStack(stack)?.name}}</p> -->
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+        @if ($index < data.length - 1) {
+            <div class="vertical-bar"></div>
+            <div class="bellow-arrow"></div>
+        }
+    }
+</div>

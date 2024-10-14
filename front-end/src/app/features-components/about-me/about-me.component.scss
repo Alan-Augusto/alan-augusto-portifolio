@@ -1,0 +1,73 @@
+@import '../../styles/theme.scss';
+
+.about-me{
+    margin-top: 5rem;
+    gap: 2rem;
+}
+
+.image-container{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;  // Impede que a imagem encolha
+    & img{
+        width: 100%;
+        height: 100%;
+    }
+
+    box-shadow: .1rem .1rem 0rem .1rem var(--system-primary-color);
+    -webkit-box-shadow: .1rem .1rem 0rem .1rem var(--system-primary-color);
+    -moz-box-shadow: .1rem .1rem 0rem .1rem var(--system-primary-color);
+    // border: 2px solid var(--system-primary-color); // Borda fina e uniforme
+}
+
+.text-container{
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: start;
+}
+
+.stack-carrousel-container{
+    //total da tela
+    // width:70vw;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.stack-carrousel{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem 2rem;
+    align-items: center;
+    padding: 1rem 0;
+    
+    //itens ficam se movendo infinitamente como um carrossel
+    animation: carrousel 30s infinite linear;
+
+    & p{
+        padding: .2rem .6rem;
+        border-radius: 1rem;
+        background-color: var(--background-color);
+    }
+
+    &:hover{
+        animation-play-state: paused;
+    }
+}
+
+@keyframes carrousel{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(-100%);
+    }
+}
+
+.complete{
+    background-color: var(--system-secondary-color) !important;
+}

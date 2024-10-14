@@ -1,0 +1,50 @@
+h1, h2, h3, h4, h5, p, label, span{
+    padding: 0rem;
+    margin: 0rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    &.headline{
+        font-weight: 500;
+    }
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+h4 {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+h5 {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+p {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+label {
+    font-size: 1.2rem;
+    font-weight: 400;
+    &.subheadline{
+        font-weight: 300;
+    }
+}
+
+span {
+    font-size: 1rem;
+    font-weight: 400;
+}

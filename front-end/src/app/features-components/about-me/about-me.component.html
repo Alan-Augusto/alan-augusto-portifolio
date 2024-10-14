@@ -1,0 +1,26 @@
+<div class="about-me section-horizontal">
+    <div class="image-container">
+        <img src="{{data.image}}" alt="eu" />
+    </div>
+
+    <div class="text-container section-text">
+        <h1>{{data.title}}</h1>
+        <label>{{data.description}}</label>
+    </div>
+</div>
+<div class="about-me section-horizontal">
+    <div class="text-container section-text">
+        <h2>{{data.objective.title}}</h2>
+        <p>{{data.objective.description}}</p>
+            <div class="stack-carrousel-container">
+                <div class="stack-carrousel">
+                    @for (objective of data.objective.items; track $index) {
+                        <p class="clickable-shadow {{objective.complete?'complete':''}}" (click)="clickStack(objective.complete, objective.url)" >{{objective.stack.name}}</p>
+                    }
+                    @for (objective of data.objective.items; track $index) {
+                        <p class="clickable-shadow">{{objective.stack.name}}</p>
+                    }
+                </div>
+            </div>
+    </div>
+</div>

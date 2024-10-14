@@ -4,7 +4,7 @@ export const profile: Profile = {
     name: "Alan Augusto",
     role: "Desenvolvedor de Software",
     description: "Estou aprendendo a criar produtos de qualidade, aprimorando minhas habilidades como desenvolvedor e construindo uma carreira sólida em tecnologia.",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQEB7fjMBM_fVQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1721674232970?e=1729123200&v=beta&t=4uZqmId0Ir-NCny2nXC-KEuwm-7e6R8lhnycrYTizdw",
+    image: "/assets/profile.png",
     socialLinks: [
         {
             name: "Linkedin",

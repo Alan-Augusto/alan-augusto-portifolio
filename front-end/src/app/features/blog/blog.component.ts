@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { HeaderService } from '../../../services/header.service';
 
 @Component({
   selector: 'blog',
@@ -9,4 +10,9 @@ import { Component } from '@angular/core';
 })
 export class BlogComponent {
 
+  private headerService = inject(HeaderService);
+
+  ngOnInit() {
+    this.headerService.visible = true;
+  }
 }
