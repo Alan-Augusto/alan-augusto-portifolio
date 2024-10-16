@@ -3,11 +3,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import profileImage from '../assets/profile.png';
 import { profileData } from '@/data/profile.data';
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Chip } from './ui/chip';
 
 const AboutMe: React.FC = () => {
     return (
         <section id="about-me" className="p-4">
-            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 w-full border">
+            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 w-full ">
                 <Avatar className="w-24 h-24">
                     <AvatarImage src={profileImage.src} alt="Foto de perfil" />
                     <AvatarFallback>AA</AvatarFallback>
@@ -23,12 +24,12 @@ const AboutMe: React.FC = () => {
                     {/* Container de stacks com flex-wrap */}
                     <div className="flex flex-wrap gap-3 mt-4 py-3">
                         {profileData.stack.map((item, index) => (
-                            <span
+                            <Chip
                                 key={index}
-                                className="bg-gray-100 rounded-full px-3 py-1 text-sm font-semibold text-gray-700"
-                            >
-                                {item}
-                            </span>
+                                text={item}
+                                icon=""
+                                color="#FF00FF"
+                            />
                         ))}
                     </div>
                 </div>
