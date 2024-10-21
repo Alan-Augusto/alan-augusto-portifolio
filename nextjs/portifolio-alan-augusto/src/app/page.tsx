@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button"
 import AboutMe from "@/components/about-me";
 import { ModeToggle } from "@/components/mode-toggle";
 import Header from "@/components/header";

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Timeline, TimelineConnector, TimelineContent, TimelineDescription, TimelineHeader, TimelineIcon, TimelineItem, TimelineLayoutProps, TimelineTime, TimelineTitle } from "./ui/timeline";
+import { Timeline, TimelineConnector, TimelineContent, TimelineDescription, TimelineHeader, TimelineIcon, TimelineItem, TimelineTime, TimelineTitle } from "./ui/timeline";
 import { experiences } from "@/data/experiences.data";
 
 

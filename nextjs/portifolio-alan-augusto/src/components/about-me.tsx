@@ -2,7 +2,6 @@ import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import profileImage from '../assets/profile.png';
 import { profileData } from '@/data/profile.data';
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Chip } from './ui/chip';
 
 const AboutMe: React.FC = () => {
