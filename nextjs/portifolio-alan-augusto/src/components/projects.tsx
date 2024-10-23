@@ -2,7 +2,6 @@
 import Image from "next/image";
 import { projectsData } from "@/data/projects.data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
-import { MyButton } from "./ui/my-button";
 import { Chip } from "./ui/chip";
 import { Button } from "./ui/button";
 
