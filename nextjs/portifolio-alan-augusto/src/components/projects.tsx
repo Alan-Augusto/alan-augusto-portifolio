@@ -4,41 +4,42 @@ import { projectsData } from "@/data/projects.data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { MyButton } from "./ui/my-button";
 import { Chip } from "./ui/chip";
+import { Button } from "./ui/button";
 
 const ProjectsList = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="mt-10">
+            <h2 className="text-2xl font-bold md:-translate-x-[4rem] translate-x-0">Meus Projetos</h2>
+            <h3 className="text-xl font-normal mb-5">Aqui estão alguns dos projetos em que trabalhei recentemente.</h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {projectsData.map((project) => (
                 <Card key={project.id} className="shadow-lg">
-                    <CardHeader>
-                        <Image 
-                            src={project.image || "/default-image.png"} 
-                            alt={project.name} 
-                            width={400} 
-                            height={200} 
-                            className="object-cover w-full h-48"
-                        />
-                        <CardTitle>{project.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <CardDescription>{project.description}</CardDescription>
-                    </CardContent>
-                    <CardFooter className="flex justify-between">
-                        {project.technologies.map((tech) => (
-                            <Chip key={tech} text={tech} color={"#FF00FF"} />
-                        ))}
-                    </CardFooter>
-                    <CardFooter className="flex justify-between">
-                        <MyButton 
-                            text={"GitHub"} 
-                            icon="🎃" 
-                            color={"#5ef39f"} 
-                            onClick={() => window.open(project.link)}                            
-                        />
-                        <MyButton text={"Demo"} icon="🚀" color={"#f35eaf"} onClick={() => window.open(project.git)} />
-                    </CardFooter>
+                <CardHeader>
+                    <Image 
+                    src={project.image || "/default-image.png"} 
+                    alt={project.name} 
+                    width={400} 
+                    height={200} 
+                    className="object-cover w-full h-48"
+                    />
+                </CardHeader>
+                <CardContent>
+                    <CardTitle className="mb-1">{project.name}</CardTitle>
+                    <CardDescription>{project.description}</CardDescription>
+                </CardContent>
+                <CardFooter className="flex gap-2 ">
+                    {project.technologies.map((tech) => (
+                    <Chip key={tech} text={tech} color={"#FF00FF"} />
+                    ))}
+                </CardFooter>
+                <CardFooter className="flex gap-2 justify-center">
+                    <Button variant="outline" onClick={() => window.open(project.link)}>Demo</Button>
+                    <Button onClick={() => window.open(project.git)}>GitHub</Button>
+                </CardFooter>
                 </Card>
             ))}
+            </div>
         </div>
     );
 };
