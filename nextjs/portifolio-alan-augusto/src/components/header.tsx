@@ -63,8 +63,7 @@ const Header: React.FC = () => {
                 <MenubarMenu>
                     <MenubarTrigger asChild className="cursor-pointer">
                         <a
-                            href="https://yourblog.com"
-                            target="_blank"
+                            href="/blog"
                             rel="noopener noreferrer"
                             className="text-xl text-gray-600 dark:text-gray-300 hover:text-green-500 transition-colors"
                         >

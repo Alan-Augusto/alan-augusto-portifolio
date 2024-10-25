@@ -1,4 +1,3 @@
-import { link } from 'fs';
 import profileImage from '../assets/profile.png';
 
 export const projectsData = [
