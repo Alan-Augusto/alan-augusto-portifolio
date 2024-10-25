@@ -95,5 +95,21 @@ body {
   background-size: 40px 40px;
   background-position: -19px -19px;
 
+  overflow: auto !important;
+
 }
 
+/* Minimalist scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: hsl(var(--foreground));
+  border-radius: 10px;
+  border: 2px solid hsl(var(--background));
+}

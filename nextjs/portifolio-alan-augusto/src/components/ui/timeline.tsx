@@ -91,6 +91,21 @@ const TimelineConnector = React.forwardRef<
 ));
 TimelineConnector.displayName = "TimelineConnector";
 
+const TimelineLastConnector = React.forwardRef<
+	HTMLDivElement,
+	React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+	<div
+		ref={ref}
+		className={cn(
+			"absolute top-[5px] left-[30px] -translate-x-1/2 translate-y-2 h-full w-px bg-gradient-to-b from-primary to-transparent",
+			className,
+		)}
+		{...props}
+	/>
+));
+TimelineLastConnector.displayName = "TimelineLastConnector";
+
 const TimelineHeader = React.forwardRef<
 	HTMLDivElement,
 	React.HTMLAttributes<HTMLDivElement>
@@ -159,6 +174,7 @@ export {
 	Timeline,
 	TimelineItem,
 	TimelineConnector,
+	TimelineLastConnector,
 	TimelineHeader,
 	TimelineTitle,
 	TimelineIcon,

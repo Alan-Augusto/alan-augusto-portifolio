@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Timeline, TimelineConnector, TimelineContent, TimelineDescription, TimelineHeader, TimelineIcon, TimelineItem, TimelineTime, TimelineTitle } from "./ui/timeline";
+import { Timeline, TimelineConnector, TimelineContent, TimelineDescription, TimelineHeader, TimelineIcon, TimelineItem, TimelineLastConnector, TimelineTime, TimelineTitle } from "./ui/timeline";
 import { experiences } from "@/data/experiences.data";
 
 
@@ -20,7 +20,8 @@ export const Experiences = () => {
 				<Timeline>
 					{items.map((item, index) => (
 						<TimelineItem key={index}>
-							<TimelineConnector />
+							{index != items.length-1 && <TimelineConnector />}
+							{index == items.length-1 && <TimelineLastConnector />}
 							<TimelineHeader>
 								<TimelineTime>{item.startdate}</TimelineTime>
 								<TimelineIcon />

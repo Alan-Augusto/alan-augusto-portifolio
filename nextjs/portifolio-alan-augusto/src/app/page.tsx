@@ -7,8 +7,7 @@ import ProjectsList from "@/components/projects";
 export default function Home() {
   return (
     <div>
-      <main className="flex flex-col items-center p-2 w-full">
-        <ModeToggle/>
+      <main className="flex flex-col items-center p-0 w-full">
         <Header/>
         <AboutMe/>
         <Experiences/>

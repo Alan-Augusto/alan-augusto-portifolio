@@ -6,8 +6,8 @@ import { Chip } from './ui/chip';
 
 const AboutMe: React.FC = () => {
     return (
-        <section id="about-me" className="p-4">
-            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 w-full ">
+        <section id="about-me" className="p-10 mt-10">
+            <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 w-full p-2 md:p-5 pt-10 ">
                 <Avatar className="w-24 h-24">
                     <AvatarImage src={profileImage.src} alt="Foto de perfil" />
                     <AvatarFallback>AA</AvatarFallback>
