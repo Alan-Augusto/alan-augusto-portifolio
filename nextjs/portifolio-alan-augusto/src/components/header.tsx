@@ -14,9 +14,14 @@ const Header: React.FC = () => {
         <header className="fixed w-full px-6 py-4 flex items-center justify-between bg-background shadow-md z-50">
 
             {/* Nome como Logo */}
-            <div className="text-2xl font-bold tracking-wide text-gray-900 dark:text-gray-200">
-                Alan Augusto
-            </div>
+            <a
+                href="/"
+                className="flex items-center space-x-2"
+            >
+                <div className="text-2xl font-bold tracking-wide text-gray-900 dark:text-gray-200">
+                    Alan Augusto
+                </div>
+            </a>
 
             {/* Menubar de Ícones Sociais */}
             <Menubar className="flex space-x-2 md:space-x-6 border-none shadow-none">
