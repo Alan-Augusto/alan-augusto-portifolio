@@ -5,7 +5,7 @@ title: "Título do Artigo"
 Aqui começa o conteúdo do artigo em Markdown.
 ## Introdução
 
-Este é um artigo de teste criado para demonstrar a formatação em Markdown. Vamos explorar alguns elementos básicos.
+Este é um artigo de teste criado para demonstrar a formatação em Markdown. Vamos explorar alguns elementos básicos.\
 
 ## Seção 1: Listas
 

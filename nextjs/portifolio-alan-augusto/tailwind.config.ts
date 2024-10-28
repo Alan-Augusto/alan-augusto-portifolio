@@ -63,14 +63,22 @@ const config: Config = {
                         h1: {
                             color: 'hsl(var(--primary))',
                             fontWeight: '700',
+                            marginBottom: '1rem',
+                            marginTop: '1rem',
+                            padding: '0',
                         },
                         h2: {
                             color: 'hsl(var(--primary))',
                             fontWeight: '600',
+                            marginBottom: '.3rem',
+                            marginTop: '1rem',
+                            padding: '0',
                         },
                         p: {
-                            marginTop: '1em',
-                            marginBottom: '1em',
+                            marginTop: '0',
+                            marginBottom: '1rem',
+                            margin: '0',
+                            padding: '0',
                         },
                         a: {
                             color: 'hsl(var(--accent))',
@@ -78,14 +86,23 @@ const config: Config = {
                             '&:hover': {
                                 color: 'hsl(var(--accent-foreground))',
                             },
+                            marginBottom: '0',
+                            marginTop: '0',
+                            padding: '0',
                         },
                         'ul > li::before': {
                             backgroundColor: 'hsl(var(--primary))',
+                            marginBottom: '0',
+                            marginTop: '0',
+                            padding: '0',
                         },
                         blockquote: {
                             borderLeftColor: 'hsl(var(--muted))',
                             color: 'hsl(var(--foreground))',
                             fontStyle: 'italic',
+                            marginBottom: '0',
+                            marginTop: '0',
+                            padding: '0',
                         },
                     },
                 },

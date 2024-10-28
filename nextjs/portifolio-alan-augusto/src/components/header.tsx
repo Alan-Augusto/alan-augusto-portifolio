@@ -18,7 +18,7 @@ const Header: React.FC = () => {
                 href="/"
                 className="flex items-center space-x-2"
             >
-                <div className="text-2xl font-bold tracking-wide text-gray-900 dark:text-gray-200">
+                <div className="text-xl md:text-2xl font-bold">
                     Alan Augusto
                 </div>
             </a>
@@ -29,7 +29,7 @@ const Header: React.FC = () => {
                 <MenubarMenu>
                     <MenubarTrigger asChild className="cursor-pointer">
                         <a
-                            href="https://www.linkedin.com"
+                            href="https://www.linkedin.com/in/alan-augusto-09671519a/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-xl text-gray-600 dark:text-gray-300 hover:text-blue-500 transition-colors"
@@ -42,7 +42,7 @@ const Header: React.FC = () => {
                 <MenubarMenu>
                     <MenubarTrigger asChild className="cursor-pointer">
                         <a
-                            href="https://github.com"
+                            href="https://github.com/alan-augusto"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-xl text-gray-600 dark:text-gray-300 hover:text-black transition-colors"
@@ -55,7 +55,7 @@ const Header: React.FC = () => {
                 <MenubarMenu>
                     <MenubarTrigger asChild className="cursor-pointer">
                         <a
-                            href="https://youtube.com"
+                            href="https://www.youtube.com/@alanaugusto5461"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-xl text-gray-600 dark:text-gray-300 hover:text-red-500 transition-colors"

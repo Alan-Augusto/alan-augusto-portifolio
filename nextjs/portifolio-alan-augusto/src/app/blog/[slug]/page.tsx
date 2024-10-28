@@ -25,8 +25,8 @@ const ArticlePage = async ({ params }: { params: Params }) => {
     return (
         <div className="w-full">
             <Header />
-            <div className="prose mx-auto pt-10     mt-10">
-                <h1 className="text-center">{frontMatter.title}</h1>
+            <div className="prose mx-auto pt-10 mt-10 px-5">
+                <h1 className="text-center mt-10 sm:mt-5">{frontMatter.title}</h1>
                 <div>
                     <MDXRemote source={content} />
                 </div>
