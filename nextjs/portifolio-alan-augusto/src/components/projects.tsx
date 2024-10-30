@@ -16,11 +16,11 @@ const ProjectsList = () => {
                 <Card key={project.id} className="shadow-lg flex flex-col h-full">
                 <CardHeader>
                     <Image 
-                    src={project.image || "/default-image.png"} 
-                    alt={project.name} 
-                    width={400} 
-                    height={200} 
-                    className="object-cover w-full h-48"
+                        src={project.image || "/default-image.png"} 
+                        alt={project.name} 
+                        width={400} 
+                        height={200} 
+                        className="object-cover w-full h-48"
                     />
                 </CardHeader>
                 <CardContent className="flex-grow">

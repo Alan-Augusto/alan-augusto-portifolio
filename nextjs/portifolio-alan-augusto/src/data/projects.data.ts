@@ -1,10 +1,11 @@
 import profileImage from '../assets/profile.png';
 
+
 export const projectsData = [
     {
         id: 1,
         name: "Meu Portfólio",
-        image: profileImage,
+        image: "https://i.ibb.co/Zd2zZsC/portifolio.jpg",
         description: "Justamente essa página aqui! Meu primeiro projeto Next.js",
         technologies: ["TypeScript", "React", "CSS"],
         git: "https://github.com/alan-augusto/alan-augusto-portifolio",
@@ -13,16 +14,16 @@ export const projectsData = [
     {
         id: 2,
         name: "Landing Page - Advogado Trabalhista",
-        image: profileImage,
+        image: "https://i.ibb.co/SQxYccf/lgl.jpg",
         description: "Landing page desenvolvida para um advogado. Aqui eu fui responsáveltambém pelo marketing digital.",
         technologies: ["TypeScript", "CSS", "HTML", "Angular"],
-        git: "https://github.com/alan-augusto/LandingPage-Luciano",
+        git: "",
         link: "https://lucianograciano.com.br"
     },
     {
         id: 6,
         name: "Landing Page - Default",
-        image: profileImage,
+        image: "https://i.ibb.co/SwTFgPZ/lp.jpg",
         description: "Uma landing page completa desenvolvida para ser adaptável a qualquer cliente. A ideia é ser um template para futuros projetos.",
         technologies: ["JavaScript", "CSS", "HTML", "React"],
         git: "https://github.com/Alan-Augusto/LandingPage-Default",
@@ -31,7 +32,7 @@ export const projectsData = [
     {
         id: 3,
         name: "Controle de Caronas",
-        image: profileImage,
+        image: "https://i.ibb.co/mDYSTF4/caronas.jpg",
         description: "Aplicação para controlar as caronas que dou aos meus amigos.",
         technologies: ["TypeScript", "CSS", "HTML", "Angular", "Firebase"],
         git: "https://github.com/alan-augusto/Controle-de-Caronas",
@@ -40,7 +41,7 @@ export const projectsData = [
     {   
         id: 4,
         name: "Task Manager",
-        image: profileImage,
+        image: "https://i.ibb.co/C6p68dG/tarefas.png",
         description: "Sistema de gerenciamento de tarefas onde eu busquei implentar minhas necessidades que não eram sanadas com o Gooogle Task.",
         technologies: ["TypeScript", "CSS", "HTML", "React", "Node.js", "MySQL"],
         git: "https://github.com/alan-augusto/TodoList"
@@ -48,7 +49,7 @@ export const projectsData = [
     {
         id: 5,
         name: "Análise de Acidentes em BH",
-        image: profileImage,
+        image: "https://i.ibb.co/9WyDwy2/acidentes.png",
         description: "Projeto acadêmico utilizando Python para análise de dados de acidentes de trânsito em Belo Horizonte.",
         technologies: ["Python", "Pandas", "Matplotlib"],
         git: "https://github.com/alan-augusto/UFMG-CS-AcidentesEmBH",
