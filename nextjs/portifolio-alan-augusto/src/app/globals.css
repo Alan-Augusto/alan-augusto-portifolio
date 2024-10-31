@@ -87,9 +87,15 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Ubuntu';
+  src: url('https://fonts.gstatic.com/s/ubuntu/v15/4iCs6KVjbNBYlgoKfw72.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
 
 body {
-  font-family: 'GeistVF', 'GeistMonoVF', sans-serif;
+  font-family: 'Ubuntu', 'GeistVF', 'GeistMonoVF', sans-serif;
   /* background de bolinhas com caderno pontilhado */
   background-image: radial-gradient(hsl(var(--primary)) 0.0040625rem, transparent 0);
   background-size: 2.5rem 2.5rem;

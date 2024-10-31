@@ -1,6 +1,5 @@
 import React from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import profileImage from '../assets/profile.png';
 import { profileData } from '@/data/profile.data';
 import { Chip } from './ui/chip';
 
@@ -8,8 +7,8 @@ const AboutMe: React.FC = () => {
     return (
         <section id="about-me" className="p-10 mt-10">
             <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-x-4 w-full p-2 md:p-5 pt-10 ">
-                <Avatar className="w-24 h-24">
-                    <AvatarImage src={profileImage.src} alt="Foto de perfil" />
+                <Avatar className="w-40 h-40">
+                    <AvatarImage src={profileData.image} alt="Foto de perfil" />
                     <AvatarFallback>AA</AvatarFallback>
                 </Avatar>
 

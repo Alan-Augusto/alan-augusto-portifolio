@@ -1,6 +1,3 @@
-import profileImage from '../assets/profile.png';
-
-
 export const projectsData = [
     {
         id: 1,
@@ -57,7 +54,7 @@ export const projectsData = [
     {
         id: 10,
         name: "OrganizaPrints",
-        image: profileImage,
+        image: "https://i.ibb.co/qn4PxL0/Representa-o-de-um-laptop-com-um-mapa-saindo-de-forma-tridimensional-de-dentro-de-sua-tela.jpg",
         description: "Aplicação Python para organizar capturas de tela de localizações do Google Maps e ordená-las por datas.",
         technologies: ["Python", "Tkinter"],
         git: "https://github.com/alan-augusto/OrganizaPrints",
@@ -66,17 +63,9 @@ export const projectsData = [
     {
         id: 12,
         name: "Advocacia - Gestão de Clientes",
-        image: profileImage,
-        description: "Aplicação em Python para gestão de clientes em escritórios de advocacia incorporado com um sistema de buscas de clientes nos diários oficiais.",
+        image: "https://i.ibb.co/v3Dx6RF/adv-clientes.png",
+        description: "Um MVP construido em Python para gestão de clientes em escritórios de advocacia incorporado com um sistema de buscas de clientes nos diários oficiais.",
         technologies: ["Python"],
         git: "https://github.com/alan-augusto/Advocacia-GestaoClientes",
-    },
-    {
-        id: 8,
-        name: "Biblioteca de Threads",
-        image: profileImage,
-        description: "Projeto em C, desenvolvido para a disciplina de Sistemas Operacionais, para gerenciamento de threads com maior efeiciência.",
-        technologies: ["C"],
-        git: "https://github.com/alan-augusto/BibliotecaThreads",
     },
 ];
