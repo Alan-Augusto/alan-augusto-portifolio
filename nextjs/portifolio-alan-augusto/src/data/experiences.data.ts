@@ -6,7 +6,7 @@ export const experiences = [
 		startdate: "01/2015",
 		enddate: "01/2020",
 		description:
-			"Desenvolvi planilhas para controle de estoque, serviços e atendimento ao cliente. Também fui responsável pela digitalização de processos e pela implementação de estratégias de marketing para a empresa.",
+			"Desenvolvi planilhas e automatizei processos de estoque, digitalizando operações para eficiência e controle.",
 	},
 	{
 		id: 2,
@@ -15,7 +15,7 @@ export const experiences = [
 		startdate: "02/2020",
 		enddate: "06/2020",
 		description:
-			"Participei da instalação de novos elevadores e, em seguida, fui transferido para a área de gestão de pessoas, onde auxiliei na reformulação do processos de alocação de funcionários.",
+			"Participei da instalação de elevadores e ajudei na reestruturação de processos de alocação de equipes, contribuindo para otimização e agilidade nos processos.",
 	},
 	{
 		id: 3,
@@ -24,7 +24,7 @@ export const experiences = [
 		startdate: "09/2020",
 		enddate: "02/2024",
 		description:
-			"Iniciei como estagiário, atuando no desenvolvimento de desenhos e modelagem 3D de estruturas metálicas e equipamentos mecânicos. Posteriormente, como projetista/desenhista, automatizei processos internos de engenharia e liderei a equipe mecânica no desenvolvimento de modelos dinâmicos BIM e sistemas de emissão de documentos.",
+			"Desenvolvi desenhos e modelos 3D de estruturas e equipamentos, liderei a automação de processos internos de engenharia e atuei como líder de modelagem dinâmica BIM.",
 	},
 	{
 		id: 4,

@@ -4,6 +4,7 @@ import { projectsData } from "@/data/projects.data";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Chip } from "./ui/chip";
 import { Button } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
 
 const ProjectsList = () => {
     return (
@@ -15,13 +16,18 @@ const ProjectsList = () => {
             {projectsData.map((project) => (
                 <Card key={project.id} className="shadow-lg flex flex-col h-full">
                     <CardHeader>
-                        <Image 
-                            src={project.image || "/default-image.png"} 
-                            alt={project.name} 
-                            width={400} 
-                            height={200} 
-                            className="object-cover w-full h-48"
-                        />
+                        {project.image &&
+                            <Image 
+                                src={project.image || "/default-image.png"} 
+                                alt={project.name} 
+                                width={400} 
+                                height={200} 
+                                className="object-cover w-full h-48"
+                            />
+                        }
+                        {!project.image &&
+                            <Skeleton className="w-full h-48" />
+                        }
                     </CardHeader>
                     <CardContent className="flex-grow">
                         <CardTitle className="mb-1">{project.name}</CardTitle>
@@ -33,7 +39,7 @@ const ProjectsList = () => {
                         ))}
                     </CardFooter>
                     <CardFooter className="flex gap-2 justify-center mt-auto pb-4">
-                        {project.link && <Button variant="outline" onClick={() => window.open(project.link)}>Demo</Button>}
+                        {project.link && <Button variant="outline" onClick={() => window.open(project.link)}>Visualizar</Button>}
                         <Button onClick={() => window.open(project.git)}>GitHub</Button>
                     </CardFooter>
                 </Card>

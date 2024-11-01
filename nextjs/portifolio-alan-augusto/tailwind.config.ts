@@ -1,3 +1,4 @@
+import { text } from "stream/consumers";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -62,15 +63,22 @@ const config: Config = {
                         color: 'hsl(var(--foreground))',
                         h1: {
                             color: 'hsl(var(--primary))',
-                            fontWeight: '700',
+                            fontWeight: '800',
                             marginBottom: '1rem',
                             marginTop: '1rem',
                             padding: '0',
                         },
                         h2: {
                             color: 'hsl(var(--primary))',
+                            fontWeight: '700',
+                            marginBottom: '.4rem',
+                            marginTop: '1rem',
+                            padding: '0',
+                        },
+                        h3: {
+                            color: 'hsl(var(--primary))',
                             fontWeight: '600',
-                            marginBottom: '.3rem',
+                            marginBottom: '.4rem',
                             marginTop: '1rem',
                             padding: '0',
                         },
@@ -79,6 +87,7 @@ const config: Config = {
                             marginBottom: '1rem',
                             margin: '0',
                             padding: '0',
+                            textAlign: 'justify',
                         },
                         a: {
                             color: 'hsl(var(--accent))',
