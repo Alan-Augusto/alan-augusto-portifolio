@@ -1,5 +1,3 @@
-import { link } from "fs";
-
 export const projectsData = [
     {
         id: 1,
