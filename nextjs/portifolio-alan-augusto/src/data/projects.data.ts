@@ -1,3 +1,5 @@
+import { link } from "fs";
+
 export const projectsData = [
     {
         id: 1,
@@ -12,16 +14,16 @@ export const projectsData = [
         id: 2,
         name: "Landing Page - Advogado Trabalhista",
         image: "https://i.ibb.co/SQxYccf/lgl.jpg",
-        description: "Landing page para advogado, com integração de marketing digital e otimização SEO para alcance estratégico.    ",
-        technologies: ["TypeScript", "CSS", "HTML", "Angular"],
-        git: "",
+        description: "Landing page para advogado, com ferramentas de análise de tráfego para marketing digital e otimização SEO para alcance estratégico.",
+        technologies: ["TypeScript", "CSS", "HTML", "React"],
+        git: "https://github.com/Alan-Augusto/LandingPage-Luciano.git",
         link: "https://lucianograciano.com.br"
     },
     {
         id: 6,
         name: "Landing Page - Default",
         image: "https://i.ibb.co/SwTFgPZ/lp.jpg",
-        description: "Uma landing page completa desenvolvida para ser adaptável a qualquer cliente. A ideia é ser um template para futuros projetos.",
+        description: "Uma landing page completa desenvolvida para ser facilmnete adaptável a qualquer cliente. A ideia é ser um template para futuros projetos.",
         technologies: ["JavaScript", "CSS", "HTML", "React"],
         git: "https://github.com/Alan-Augusto/LandingPage-Default",
         link: "https://landing-page-default-sigma.vercel.app/"
@@ -30,7 +32,7 @@ export const projectsData = [
         id: 3,
         name: "Controle de Caronas",
         image: "https://i.ibb.co/mDYSTF4/caronas.jpg",
-        description: "Aplicação prática para controle de caronas, implementando lógica de autenticação e armazenamento de dados em tempo real.",
+        description: "Aplicação prática para controle de caronas, implementando lógica de autenticação e armazenamento de dados em tempo real. Usado para gerenciar minhas caronas na faculdade.",
         technologies: ["TypeScript", "CSS", "HTML", "Angular", "Firebase"],
         git: "https://github.com/alan-augusto/Controle-de-Caronas",
         link: "https://controle-de-caronas.vercel.app/"
@@ -49,6 +51,7 @@ export const projectsData = [
         image: "https://i.ibb.co/9WyDwy2/acidentes.png",
         description: "Projeto acadêmico com foco em análise de dados de acidentes de trânsito em Belo Horizonte de 2012 a 2022",
         technologies: ["Python", "Pandas", "Matplotlib"],
+        link:"https://alan-augusto-portifolio.vercel.app/blog/acidentes-em-bh",
         git: "https://github.com/alan-augusto/UFMG-CS-AcidentesEmBH",
     },
     {

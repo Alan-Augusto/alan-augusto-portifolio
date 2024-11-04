@@ -62,7 +62,7 @@ const BlogPage = () => {
                                 <p>{post.content}</p>
                             </CardContent>
                             <CardFooter className='gap-2'>
-                                <Button onClick={() => handleShare(`${window.location.origin}/blog/${post.file}`)}>Compartilhe</Button>
+                                <Button variant={"outline"} onClick={() => handleShare(`${window.location.origin}/blog/${post.file}`)}>Compartilhe</Button>
                                 <Button onClick={() => router.push(`/blog/${post.file}`)}>Leia</Button>
                             </CardFooter>
                         </Card>

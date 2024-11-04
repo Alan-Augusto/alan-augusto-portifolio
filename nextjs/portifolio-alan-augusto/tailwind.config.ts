@@ -89,6 +89,10 @@ const config: Config = {
                             padding: '0',
                             textAlign: 'justify',
                         },
+                        strong:{
+                            color: 'hsl(var(--primary))',
+                            fontWeith: '600',
+                        },
                         a: {
                             color: 'hsl(var(--accent))',
                             textDecoration: 'underline',

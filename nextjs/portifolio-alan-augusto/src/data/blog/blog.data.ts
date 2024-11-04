@@ -1,9 +1,4 @@
 
 export const posts = [
-    { id: 1, title: 'First Post', content: 'This is the first post content.', file: 'article1' },
-    { id: 1, title: 'First Post', content: 'This is the first post content.', file: 'article1' },
-    { id: 1, title: 'First Post', content: 'This is the first post content.', file: 'article1' },
-    { id: 2, title: 'Second Post', content: 'This is the second post content.', file: 'article2' },
-    { id: 2, title: 'Second Post', content: 'This is the second post content.', file: 'article2' },
-    { id: 2, title: 'Second Post', content: 'This is the second post content.', file: 'article2' },
+    { id: 1, title: 'Análise de acidentes em BH', content: 'Um estudo prático sobre os acidentes de trânsito em Belo Horizonte utilizando algoritmo de aprendizado descritico.', file: 'acidentes-em-bh' },
 ];

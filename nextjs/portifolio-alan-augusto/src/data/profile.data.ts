@@ -3,7 +3,7 @@ export const profileData = {
     image: "https://i.ibb.co/4dVsPm9/profile.jpg",
     greeting: 'Olá! Eu sou o Alan 👋🏼',
     role: 'Desenvolvedor Full-Stack',
-    presentation: 'Desenvolvedor Full Stack com paixão por criar soluções eficientes e de impacto, focado em entregar valor com tecnologias modernas. Formando em Sistemas de Informação pela UFMG, possuo experiência prática no desenvolvimento de sistemas voltados para automação de processos e sistemas web completos.',
+    presentation: 'Sou apaixonado por criar soluções elegantes, eficientes e de impacto, focado em entregar valor com tecnologias modernas e muitas vezes minimalista. Estou formando em Sistemas de Informação pela UFMG e atualmente trabalho com desenvolvimento de sistemas web coplexos no mercado de contabilidade. Minhas tecnologias do momento são:',
     stack: [
         'HTML',
         'CSS',
@@ -12,12 +12,16 @@ export const profileData = {
         'Angular',
         'React',
         'React Native',
+        "Microfrontends",
         'Node.js',
         'C#',
         '.NET Core',
         'SQL Server',
         'PostgreSQL',
         'AWS',
-        'Docker'
+        'Docker',
+        'Entity Framework',
+        'ASP.NET',
+        'Microservices',
     ]
 }

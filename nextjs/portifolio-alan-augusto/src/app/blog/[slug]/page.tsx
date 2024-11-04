@@ -23,7 +23,7 @@ const ArticlePage = async ({ params }: { params: Params }) => {
     const { content, data: frontMatter } = matter(fileContents);
 
     return (
-        <div className="w-full">
+        <div className="w-full ">
             <Header />
             <div className="prose mx-auto pt-10 mt-10 px-5">
                 <h1 className="text-center mt-10 sm:mt-5">{frontMatter.title}</h1>
