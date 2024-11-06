@@ -8,7 +8,7 @@ import { Card } from './ui/card'; // Importe o Card do shadcnUI
 import { Chip } from './ui/chip';
 
 const AcademicTrajectory = () => {
-    const [isVisible, setIsVisible] = useState(true);
+    // const [isVisible, setIsVisible] = useState(true);
 
     // const toggleVisibility = () => {
     //     setIsVisible(!isVisible);
@@ -23,7 +23,7 @@ const AcademicTrajectory = () => {
                 {isVisible ? <LuChevronsUpDown /> : <LuChevronsDownUp />}
             </Button> */}
 
-            <div className={`mt-4 overflow-hidden transition-max-height duration-300 ease-in-out ${isVisible ? 'max-h-screen' : 'max-h-0'}`}>
+            <div className={`mt-4 overflow-hidden transition-max-height duration-300 ease-in-out ${true ? 'max-h-screen' : 'max-h-0'}`}>
                 <h3 className="text-xl font-semibold mb-5">Formação acadêmica</h3>
                 <ul className="space-y-4">
                     {studentData.map((item, index) => (
