@@ -28,7 +28,7 @@ export const Experiences = () => {
 								<TimelineIcon />
 								<TimelineTitle>
 									{item.position}
-									<Label className="font-normmediumal text-xs text-muted-foreground">{item.title}</Label>
+									<Label className="text-xs text-muted-foreground">{item.title}</Label>
 									</TimelineTitle>
 							</TimelineHeader>
 							<TimelineContent>
