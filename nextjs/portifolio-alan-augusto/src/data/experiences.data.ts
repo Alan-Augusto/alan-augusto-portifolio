@@ -2,11 +2,11 @@ export const experiences = [
 	{
 		id: 1,
 		title: "Henrique Motos",
-		position: "Responsável de TI",
+		position: "Auxiliar de TI",
 		startdate: "01/2015",
 		enddate: "01/2020",
 		description:
-			"Desenvolvi planilhas e automatizei processos de estoque, digitalizando operações para eficiência e controle.",
+			"Responsável por desenvolver planilhas e automatizar processos de estoque, digitalizando operações para melhorar a eficiência e o controle na oficina.",
 	},
 	{
 		id: 2,

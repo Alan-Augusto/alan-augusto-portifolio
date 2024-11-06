@@ -96,13 +96,15 @@
 
 body {
   font-family: 'Ubuntu', 'GeistVF', 'GeistMonoVF', sans-serif;
-  /* background de bolinhas com caderno pontilhado */
-  background-image: radial-gradient(hsl(var(--primary)) 0.0040625rem, transparent 0);
-  background-size: 2.5rem 2.5rem;
-  background-position: -1.1875rem -1.1875rem;
 
-  overflow: auto !important;
-
+  --dot-bg: hsl(var(--background));
+  --dot-color: hsl(var(--foreground));
+  --dot-size: 1px;
+  --dot-space: 30px;
+  background:
+    linear-gradient(90deg, var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    linear-gradient(var(--dot-bg) calc(var(--dot-space) - var(--dot-size)), transparent 1%) center / var(--dot-space) var(--dot-space),
+    var(--dot-color);
 }
 
 /* Minimalist scrollbar */

@@ -3,6 +3,7 @@
 import React from "react";
 import { Timeline, TimelineConnector, TimelineContent, TimelineDescription, TimelineHeader, TimelineIcon, TimelineItem, TimelineLastConnector, TimelineTime, TimelineTitle } from "./ui/timeline";
 import { experiences } from "@/data/experiences.data";
+import { Label } from "@radix-ui/react-menubar";
 
 
 export const Experiences = () => {
@@ -25,10 +26,15 @@ export const Experiences = () => {
 							<TimelineHeader>
 								<TimelineTime>{item.startdate}</TimelineTime>
 								<TimelineIcon />
-								<TimelineTitle>{item.title}</TimelineTitle>
+								<TimelineTitle>
+									{item.position}
+									<Label className="font-normmediumal text-xs text-muted-foreground">{item.title}</Label>
+									</TimelineTitle>
 							</TimelineHeader>
 							<TimelineContent>
-								<TimelineDescription>{item.description}</TimelineDescription>
+								<TimelineDescription>
+									{item.description}
+									</TimelineDescription>
 							</TimelineContent>
 						</TimelineItem>	
 					))}
