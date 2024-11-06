@@ -4,6 +4,7 @@ import { Experiences } from "@/components/experiences";
 import ProjectsList from "@/components/projects";
 import Footer from "@/components/footer";
 import AcademicTrajectory from "@/components/academic-trajectory";
+import DownloadButton from "@/components/download-button";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <main className="flex flex-col items-center p-0 w-full">
         <Header/>
         <AboutMe/>
+        <DownloadButton/>
         <Experiences/>
         <ProjectsList/>
         <AcademicTrajectory/>

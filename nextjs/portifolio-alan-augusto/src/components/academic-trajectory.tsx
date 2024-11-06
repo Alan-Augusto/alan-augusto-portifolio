@@ -17,7 +17,7 @@ const AcademicTrajectory = () => {
     return (
         <Card className="p-10 w-full md:w-2/5 mx-auto transition-all duration-300 ease-in-out border-none shadow-none bg-transparent">
             <h2 className="text-2xl font-bold">👨🏼‍🎓 Meus estudos</h2>
-            <h3 className="text-xl font-normal mb-5">Conheça um pouco da minha trajetória acadêmica e minha capacitações.</h3>
+            <h3 className="text-lg font-normal mb-5">Conheça um pouco da minha trajetória acadêmica e minha capacitações.</h3>
             {/* <Button onClick={toggleVisibility} className="mb-4 flex items-center justify-between w-full" variant="outline">
                 Ver Detalhes
                 {isVisible ? <LuChevronsUpDown /> : <LuChevronsDownUp />}
@@ -29,10 +29,10 @@ const AcademicTrajectory = () => {
                     {studentData.map((item, index) => (
                         <li key={index} className="border-b pb-2">
                             <h3 className="font-semibold">{item.title}</h3>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm">
                                 {item.institution} ({item.startDate} - {item.endDate})
                             </p>
-                            <p className="text-gray-700">{item.description}</p>
+                            <p>{item.description}</p>
                         </li>
                     ))}
                 </ul>
@@ -41,8 +41,8 @@ const AcademicTrajectory = () => {
                 {extracurricularData.map((project, index) => (
                     <div key={index} className="border-b pb-2">
                         <h3 className="font-semibold">{project.title}</h3>
-                        <p className="text-sm text-gray-600">{project.institution}</p>
-                        <p className="text-gray-700">{project.description}</p>
+                        <p className="text-sm">{project.institution}</p>
+                        <p>{project.description}</p>
                         <div className="flex flex-wrap gap-2 mb-4 mt-0">
                         {project.items.map((item) => (
                             <Chip key={item} text={item} color={"#FF00FF"} />

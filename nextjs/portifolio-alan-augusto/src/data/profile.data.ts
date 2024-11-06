@@ -3,7 +3,7 @@ export const profileData = {
     image: "https://i.ibb.co/4dVsPm9/profile.jpg",
     greeting: 'Olá! Eu sou o Alan 👋🏼',
     role: 'Desenvolvedor Full-Stack',
-    presentation: 'Sou apaixonado por criar soluções elegantes, eficientes e de impacto, focado em entregar valor com tecnologias modernas e muitas vezes minimalista. Estou formando em Sistemas de Informação pela UFMG e atualmente trabalho com desenvolvimento de sistemas web coplexos no mercado de contabilidade. Minhas tecnologias do momento são:',
+    presentation: 'Sou apaixonado por criar soluções elegantes, eficientes e de impacto, focado em entregar valor com tecnologias modernas e muitas vezes minimalista. Estou formando em Sistemas de Informação pela UFMG e atualmente trabalho com desenvolvimento de sistemas web complexos no mercado de contabilidade. Minhas tecnologias do momento são:',
     stack: [
         'HTML',
         'CSS',

@@ -9,8 +9,8 @@ import { Skeleton } from "./ui/skeleton";
 const ProjectsList = () => {
     return (
         <div className="m-10 mt-10">
-            <h2 className="text-2xl font-bold">Meus Projetos</h2>
-            <h3 className="text-xl font-normal mb-5">Aqui estão alguns dos projetos em que trabalhei recentemente.</h3>
+            <h2 className="text-2xl font-bold">💻 Meus Projetos</h2>
+            <h3 className="text-lg font-normal mb-5">Aqui estão alguns dos projetos em que trabalhei recentemente.</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {projectsData.map((project) => (
