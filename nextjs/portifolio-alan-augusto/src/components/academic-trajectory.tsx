@@ -10,9 +10,9 @@ import { Chip } from './ui/chip';
 const AcademicTrajectory = () => {
     const [isVisible, setIsVisible] = useState(true);
 
-    const toggleVisibility = () => {
-        setIsVisible(!isVisible);
-    };
+    // const toggleVisibility = () => {
+    //     setIsVisible(!isVisible);
+    // };
 
     return (
         <Card className="p-10 w-full md:w-2/5 mx-auto transition-all duration-300 ease-in-out border-none shadow-none bg-transparent">
