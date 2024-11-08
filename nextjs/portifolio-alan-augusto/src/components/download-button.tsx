@@ -31,7 +31,6 @@ const DownloadButton: React.FC = () => {
 
   return (
     <Button onClick={handleDownload} className='fixed bottom-8 right-4 transition-transform duration-500 ease-in-out transform hover:scale-110 rounded-full'>
-      
       <LuFileDown />
     </Button>
   );

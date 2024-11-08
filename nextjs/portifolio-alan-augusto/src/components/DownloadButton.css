@@ -1,0 +1,41 @@
+.download-button {
+    display: flex;
+    align-items: center;
+    background-color: hsl(var(--primary));
+    /* Cor azul */
+    color: hsl(var(--secondary));
+    padding: 8px;
+    border-radius: 9999px;
+    /* Arredondamento total */
+    overflow: hidden;
+    width: 40px;
+    /* Largura inicial pequena */
+    transition: width 0.3s ease;
+}
+
+.download-button:hover {
+    width: 200px;
+    /* Largura expandida ao passar o mouse */
+}
+
+.icon {
+    min-width: 24px;
+    /* Largura mínima para o ícone ser visível */
+    margin-right: 8px;
+}
+
+.text {
+    white-space: nowrap;
+    opacity: 0;
+    /* Texto invisível inicialmente */
+    transition: opacity 0.3s ease;
+    margin-left: 0;
+    /* Remove espaçamento para manter o texto escondido */
+}
+
+.download-button:hover .text {
+    opacity: 1;
+    /* Texto aparece ao passar o mouse */
+    margin-left: 8px;
+    /* Adiciona espaço entre o ícone e o texto ao passar o mouse */
+}

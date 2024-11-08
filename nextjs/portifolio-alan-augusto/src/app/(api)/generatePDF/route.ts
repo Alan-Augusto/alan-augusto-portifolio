@@ -1,119 +1,90 @@
 import { NextResponse } from 'next/server';
-import { PDFDocument, RGB, rgb } from 'pdf-lib';
+import puppeteer from 'puppeteer';
+import { marked } from 'marked';
 import { experiences } from '@/data/experiences.data';
 import { profileData } from '@/data/profile.data';
-import { projectsData } from '@/data/projects.data';
+// import { projectsData } from '@/data/projects.data';
 import { studentData, extracurricularData } from '@/data/students.data';
 
 export async function GET() {
-  const pdfDoc = await PDFDocument.create();
+  // Formatar dados como Markdown
+  const markdownContent = `
+# ${profileData.name}
+_${profileData.role}_
 
-  const dataAtual = new Date();
-  const pdfFileName = `Alan Augusto - Curriculo - ${dataAtual.getDate()}-${dataAtual.getMonth() + 1}-${dataAtual.getFullYear()}.pdf`;
+${profileData.presentation}
+
+---
+
+## Skills
+${profileData.stack.join(', ')}
+
+## Experiência Profissional
+${experiences
+    .map(exp => `**${exp.position} - ${exp.title}**\n*(${exp.startdate} - ${exp.enddate})*\n${exp.description}`)
+    .join('\n\n')}
+
+## Educação
+${studentData
+    .map(edu => `**${edu.title} - ${edu.institution}**\n*(${edu.startDate} - ${edu.endDate})*\n${edu.description}`)
+    .join('\n\n')}
+
+## Atividades Extracurriculares
+${extracurricularData
+    .map(extra => `**${extra.title} - ${extra.institution}**\n${extra.description}\n*Tópicos:* ${extra.items.join(', ')}`)
+    .join('\n\n')}
+`;
+
+  // Converter o Markdown para HTML usando `marked`
+  const htmlContent = `
+    <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1, h2 { color: #333; }
+          h1 { font-size: 24px; }
+          h2 { font-size: 18px; margin-top: 20px; }
+          p, li { font-size: 12px; line-height: 1.5; color: #555; }
+          hr { border: 1px solid #ddd; margin: 20px 0; }
+          
+          /* Estilo para a imagem de perfil arredondada no canto superior direito */
+          .profile-pic {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+
+          .content { 
+            margin-top: 50px; 
+          }
+        </style>
+      </head>
+      <body>
+        <img src="${profileData.image}" alt="Foto de Perfil" class="profile-pic" />
+        <div class="content">${marked(markdownContent)}</div>
+      </body>
+    </html>
+  `;
+
+  // Criar o PDF com Puppeteer
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.setContent(htmlContent);
+  const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
+  await browser.close();
+
+  const pdfFileName = `Curriculo_${profileData.name.replace(" ", "_")}.pdf`;
   
-  // Função para criar uma nova página e redefinir o cursor vertical
-  const addNewPage = () => {
-    const page = pdfDoc.addPage([595, 842]); // A4
-    return { page, y: page.getSize().height - 30 };
-  };
-
-  let { page, y } = addNewPage();
-
-  // Configurações de estilo
-  const titleFontSize = 18;
-  const sectionFontSize = 14;
-  const contentFontSize = 10;
-  const marginLeft = 50;
-  const lineHeight = 15;
-  const sectionSpacing = 20;
-  const dividerSpacing = 10;
-
-  // Função para checar o espaço e adicionar uma nova página se necessário
-  const checkSpace = (requiredSpace: number) => {
-    if (y - requiredSpace < 30) {
-      ({ page, y } = addNewPage());
-    }
-  };
-
-  // Função para adicionar texto e atualizar posição Y
-  const drawText = (text: string, options: { size: number, color: RGB , maxWidth?: number }) => {
-    checkSpace(options.size + lineHeight);
-    page.drawText(text, { x: marginLeft, y, ...options });
-    y -= options.size + lineHeight;
-  };
-
-  // Função para desenhar uma linha divisória
-  const drawDivider = () => {
-    checkSpace(dividerSpacing);
-    page.drawLine({
-      start: { x: marginLeft, y },
-      end: { x: page.getSize().width - marginLeft, y },
-      thickness: 0.5,
-      color: rgb(0.8, 0.8, 0.8),
-    });
-    y -= dividerSpacing;
-  };
-
-  // Nome e Cargo
-  drawText(profileData.name, { size: titleFontSize, color: rgb(0, 0, 0) });
-  drawText(profileData.role, { size: sectionFontSize, color: rgb(0.4, 0.4, 0.4) });
-  drawDivider();
-  y -= sectionSpacing;
-
-  // Perfil Pessoal
-  drawText(profileData.presentation, { size: contentFontSize, color: rgb(0, 0, 0), maxWidth: 500 });
-  drawDivider();
-  y -= sectionSpacing;
-
-  // Sessão de Tecnologias
-  drawText('Tecnologias:', { size: sectionFontSize, color: rgb(0, 0, 0) });
-  drawText(profileData.stack.join(', '), { size: contentFontSize, color: rgb(0, 0, 0) });
-  drawDivider();
-  y -= sectionSpacing;
-
-  // Sessão de Experiências
-  drawText('Experiência Profissional:', { size: sectionFontSize, color: rgb(0, 0, 0) });
-  experiences.forEach(exp => {
-    drawText(`${exp.position} - ${exp.title} (${exp.startdate} - ${exp.enddate})`, { size: contentFontSize, color: rgb(0, 0, 0) });
-    drawText(exp.description, { size: contentFontSize - 1, color: rgb(0.3, 0.3, 0.3), maxWidth: 500 });
-    y -= sectionSpacing;
-  });
-  drawDivider();
-
-  // Sessão de Projetos
-  drawText('Projetos:', { size: sectionFontSize, color: rgb(0, 0, 0) });
-  projectsData.forEach(proj => {
-    drawText(proj.name, { size: contentFontSize, color: rgb(0, 0, 0) });
-    drawText(proj.description, { size: contentFontSize - 1, color: rgb(0.3, 0.3, 0.3), maxWidth: 500 });
-    y -= sectionSpacing;
-  });
-  drawDivider();
-
-  // Sessão de Educação
-  drawText('Educação:', { size: sectionFontSize, color: rgb(0, 0, 0) });
-  studentData.forEach(edu => {
-    drawText(`${edu.title} - ${edu.institution} (${edu.startDate} - ${edu.endDate})`, { size: contentFontSize, color: rgb(0, 0, 0) });
-    drawText(edu.description, { size: contentFontSize - 1, color: rgb(0.3, 0.3, 0.3), maxWidth: 500 });
-    y -= sectionSpacing;
-  });
-  drawDivider();
-
-  // Sessão de Atividades Extracurriculares
-  drawText('Atividades Extracurriculares:', { size: sectionFontSize, color: rgb(0, 0, 0) });
-  extracurricularData.forEach(extra => {
-    drawText(`${extra.title} - ${extra.institution}`, { size: contentFontSize, color: rgb(0, 0, 0) });
-    drawText(extra.description, { size: contentFontSize - 1, color: rgb(0.3, 0.3, 0.3), maxWidth: 500 });
-    drawText(`Tópicos: ${extra.items.join(', ')}`, { size: contentFontSize - 1, color: rgb(0.3, 0.3, 0.3) });
-    y -= sectionSpacing;
-  });
-  drawDivider();
-
-  // Gerar o PDF e enviar na resposta
-  const pdfBytes = await pdfDoc.save();
-  return new NextResponse(pdfBytes, {
+  // Retornar o PDF na resposta
+  return new NextResponse(pdfBuffer, {
     headers: {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename=' + pdfFileName, 
-    },
+      'Content-Disposition': `attachment; filename=${pdfFileName}`
+    }
   });
 }
