@@ -1,6 +1,5 @@
 const express = require('express');
-const puppeteer = require('puppeteer');
-const { marked } = require('marked');
+const PDFDocument = require('pdfkit');
 const profileData = require('../../data/profile.data');
 const experiences = require('../../data/experiences.data');
 const studentData = require('../../data/student.data');
@@ -8,84 +7,87 @@ const extracurricularData = require('../../data/extracurricular.data');
 
 const router = express.Router();
 
-router.get('/generate-pdf', async (req, res) => {
+router.get('/generate-pdf', (req, res) => {
     try {
+        // Criar um novo documento PDF
+        const doc = new PDFDocument({ margin: 50 });
 
-      console.log('profileData', profileData);
-      console.log('experiences', experiences);
-      console.log('studentData', studentData);
-      console.log('extracurricularData', extracurricularData);
-
-
-        // Gerar o conteúdo do Markdown
-        const markdownContent = `
-# ${profileData.name}
-_${profileData.role}_
-
-${profileData.presentation}
-
----
-
-## Skills
-${profileData.stack.join(', ')}
-
-## Experiência Profissional
-${experiences
-            .map(exp => `**${exp.position} - ${exp.title}**\n*(${exp.startdate} - ${exp.enddate})*\n${exp.description}`)
-            .join('\n\n')}
-
-## Educação
-${studentData
-            .map(edu => `**${edu.title} - ${edu.institution}**\n*(${edu.startDate} - ${edu.endDate})*\n${edu.description}`)
-            .join('\n\n')}
-
-## Atividades Extracurriculares
-${extracurricularData
-            .map(extra => `**${extra.title} - ${extra.institution}**\n${extra.description}\n*Tópicos:* ${extra.items.join(', ')}`)
-            .join('\n\n')}
-`;
-
-        // Transformar o Markdown em HTML
-        const htmlContent = `
-<html>
-  <head>
-    <style>
-      body { font-family: Arial, sans-serif; margin: 20px; }
-      h1, h2 { color: #333; }
-      p, li { font-size: 12px; line-height: 1.5; color: #555; }
-      hr { border: 1px solid #ddd; margin: 20px 0; }
-      .profile-pic {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-      }
-    </style>
-  </head>
-  <body>
-    <img src="${profileData.image}" alt="Foto de Perfil" class="profile-pic" />
-    <div>${marked(markdownContent)}</div>
-  </body>
-</html>
-`;
-
-        // Gerar o PDF usando Puppeteer
-        const browser = await puppeteer.launch({
-          args: ['--no-sandbox', '--disable-setuid-sandbox']
-        });
-        const page = await browser.newPage();
-        await page.setContent(htmlContent);
-        const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
-        await browser.close();
-
-        // Retornar o PDF como resposta
+        // Configurar os cabeçalhos da resposta HTTP
         res.setHeader('Content-Type', 'application/pdf');
         res.setHeader('Content-Disposition', 'attachment; filename="Curriculo.pdf"');
-        res.send(pdfBuffer);
+
+        // Enviar o conteúdo PDF diretamente como resposta
+        doc.pipe(res);
+
+        // Cabeçalho do currículo
+        doc
+            .fontSize(20)
+            .text(profileData.name, { align: 'center' })
+            .fontSize(14)
+            .text(profileData.role, { align: 'center', underline: true })
+            .moveDown();
+
+        // Apresentação
+        doc
+            .fontSize(12)
+            .text(profileData.presentation)
+            .moveDown();
+
+        // Skills
+        doc
+            .fontSize(16)
+            .text('Skills', { underline: true })
+            .moveDown(0.5)
+            .fontSize(12)
+            .text(profileData.stack.join(', '))
+            .moveDown();
+
+        // Experiência Profissional
+        doc
+            .fontSize(16)
+            .text('Experiência Profissional', { underline: true })
+            .moveDown(0.5);
+        experiences.forEach(exp => {
+            doc
+                .fontSize(12)
+                .text(`**${exp.position} - ${exp.title}**`, { continued: true })
+                .text(` (${exp.startdate} - ${exp.enddate})`)
+                .text(exp.description)
+                .moveDown();
+        });
+
+        // Educação
+        doc
+            .fontSize(16)
+            .text('Educação', { underline: true })
+            .moveDown(0.5);
+        studentData.forEach(edu => {
+            doc
+                .fontSize(12)
+                .text(`**${edu.title} - ${edu.institution}**`, { continued: true })
+                .text(` (${edu.startDate} - ${edu.endDate})`)
+                .text(edu.description)
+                .moveDown();
+        });
+
+        // Atividades Extracurriculares
+        doc
+            .fontSize(16)
+            .text('Atividades Extracurriculares', { underline: true })
+            .moveDown(0.5);
+        extracurricularData.forEach(extra => {
+            doc
+                .fontSize(12)
+                .text(`**${extra.title} - ${extra.institution}**`)
+                .text(extra.description)
+                .text(`Tópicos: ${extra.items.join(', ')}`)
+                .moveDown();
+        });
+
+        // Finalizar o documento
+        doc.end();
     } catch (error) {
-        console.error(error);
+        console.error('Erro ao gerar o PDF:', error);
         res.status(500).send('Erro ao gerar o PDF');
     }
 });
