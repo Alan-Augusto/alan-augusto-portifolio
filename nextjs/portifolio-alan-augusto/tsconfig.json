@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "api/data/projects.data.js", "api/data/student.data.js", "api/data/experiences.data.js", "api/data/profile.data.js"],
   "exclude": ["node_modules"]
 }
