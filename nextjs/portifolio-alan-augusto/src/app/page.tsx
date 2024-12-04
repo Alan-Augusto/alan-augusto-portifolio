@@ -9,7 +9,7 @@ import DownloadButton from "@/components/download-button";
 export default function Home() {
   return (
     <div>
-      <main className="flex flex-col items-center p-0 w-full">
+      <main className="flex flex-col items-center p-0 w-full" id="pdf-content">
         <Header/>
         <AboutMe/>
         <DownloadButton/>

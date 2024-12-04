@@ -1,90 +1,153 @@
 import { NextResponse } from 'next/server';
-import puppeteer from 'puppeteer';
-import { marked } from 'marked';
 import { experiences } from '@/data/experiences.data';
 import { profileData } from '@/data/profile.data';
-// import { projectsData } from '@/data/projects.data';
 import { studentData, extracurricularData } from '@/data/students.data';
 
+
 export async function GET() {
-  // Formatar dados como Markdown
-  const markdownContent = `
-# ${profileData.name}
-_${profileData.role}_
+  try {
+    // Função para formatar texto como HTML
+  const formatText = (text: string) => text.replace(/\n/g, '<br/>');
 
-${profileData.presentation}
-
----
-
-## Skills
-${profileData.stack.join(', ')}
-
-## Experiência Profissional
-${experiences
-    .map(exp => `**${exp.position} - ${exp.title}**\n*(${exp.startdate} - ${exp.enddate})*\n${exp.description}`)
-    .join('\n\n')}
-
-## Educação
-${studentData
-    .map(edu => `**${edu.title} - ${edu.institution}**\n*(${edu.startDate} - ${edu.endDate})*\n${edu.description}`)
-    .join('\n\n')}
-
-## Atividades Extracurriculares
-${extracurricularData
-    .map(extra => `**${extra.title} - ${extra.institution}**\n${extra.description}\n*Tópicos:* ${extra.items.join(', ')}`)
-    .join('\n\n')}
-`;
-
-  // Converter o Markdown para HTML usando `marked`
+  // Conteúdo HTML do currículo
   const htmlContent = `
-    <html>
-      <head>
-        <style>
-          body { font-family: Arial, sans-serif; margin: 20px; }
-          h1, h2 { color: #333; }
-          h1 { font-size: 24px; }
-          h2 { font-size: 18px; margin-top: 20px; }
-          p, li { font-size: 12px; line-height: 1.5; color: #555; }
-          hr { border: 1px solid #ddd; margin: 20px 0; }
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+    <head>
+      <meta charset="UTF-8">
+      <title>Currículo - ${profileData.name}</title>
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        body {
+          font-family: Arial, sans-serif;
+          line-height: 1.6;
+          max-width: 800px;
           
-          /* Estilo para a imagem de perfil arredondada no canto superior direito */
-          .profile-pic {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          }
+          margin: 0 auto;
+          padding: 20px;
+          color: #333;
+        }
+        .header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+          border-bottom: 2px solid #333;
+          padding-bottom: 10px;
+        }
+        .header-info h1 {
+          font-size: 24px;
+          margin-bottom: 5px;
+        }
+        .header-info p {
+          font-size: 14px;
+          color: #666;
+        }
+        .profile-pic {
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 3px solid #333;
+        }
+        .section {
+          margin-bottom: 20px;
+        }
+        .section h2 {
+          border-bottom: 1px solid #ccc;
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+          font-size: 18px;
+        }
+        .experience, .education, .extracurricular {
+          margin-bottom: 15px;
+        }
+        .experience h3, .education h3, .extracurricular h3 {
+          font-size: 16px;
+        }
+        .experience p, .education p, .extracurricular p {
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 5px;
+        }
+        .skills {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+        }
+        .skills span {
+          background-color: #f0f0f0;
+          padding: 3px 8px;
+          border-radius: 3px;
+          font-size: 12px;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="header">
+        <div class="header-info">
+          <h1>${profileData.name}</h1>
+          <p>${profileData.role}</p>
+          <p>${profileData.presentation}</p>
+        </div>
+        <img src="${profileData.image}" alt="Foto de Perfil" class="profile-pic">
+      </div>
 
-          .content { 
-            margin-top: 50px; 
-          }
-        </style>
-      </head>
-      <body>
-        <img src="${profileData.image}" alt="Foto de Perfil" class="profile-pic" />
-        <div class="content">${marked(markdownContent)}</div>
-      </body>
+      <div class="section skills">
+        <h2>Habilidades</h2>
+        ${profileData.stack.map(skill => `<span>${skill}</span>`).join('')}
+      </div>
+
+      <div class="section experiences">
+        <h2>Experiência Profissional</h2>
+        ${experiences.map(exp => `
+          <div class="experience">
+            <h3>${exp.position} - ${exp.title}</h3>
+            <p>${exp.startdate} - ${exp.enddate}</p>
+            <p>${formatText(exp.description)}</p>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="section education">
+        <h2>Educação</h2>
+        ${studentData.map(edu => `
+          <div class="education">
+            <h3>${edu.title} - ${edu.institution}</h3>
+            <p>${edu.startDate} - ${edu.endDate}</p>
+            <p>${formatText(edu.description)}</p>
+          </div>
+        `).join('')}
+      </div>
+
+      <div class="section extracurricular">
+        <h2>Atividades Extracurriculares</h2>
+        ${extracurricularData.map(extra => `
+          <div class="extracurricular">
+            <h3>${extra.title} - ${extra.institution}</h3>
+            <p>${formatText(extra.description)}</p>
+            <p><strong>Tópicos:</strong> ${extra.items.join(', ')}</p>
+          </div>
+        `).join('')}
+      </div>
+    </body>
     </html>
   `;
 
-  // Criar o PDF com Puppeteer
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setContent(htmlContent);
-  const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true });
-  await browser.close();
-
-  const pdfFileName = `Curriculo_${profileData.name.replace(" ", "_")}.pdf`;
-  
-  // Retornar o PDF na resposta
-  return new NextResponse(pdfBuffer, {
-    headers: {
-      'Content-Type': 'application/pdf',
-      'Content-Disposition': `attachment; filename=${pdfFileName}`
-    }
-  });
+    return new NextResponse(htmlContent, {
+      headers: {
+        'Content-Type': 'text/html',
+      },
+    });
+  } catch (error) {
+    console.error('Erro ao gerar o currículo:', error);
+    return new NextResponse(JSON.stringify({ error: 'Falha ao gerar o currículo' }), {
+      status: 500,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 }
