@@ -1,34 +1,33 @@
 'use client';
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { LuFileDown } from "react-icons/lu";
+import { ImSpinner2 } from "react-icons/im";
 
 const DownloadButton: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleDownload = async () => {
+    setIsLoading(true); // Começa o carregamento
     try {
       const response = await fetch('/generatePDF', { method: 'GET' });
+      if (!response.ok) throw new Error('Erro ao gerar o PDF');
 
-      if (response.ok) {
-        const htmlContent = await response.text();
-        const printWindow = window.open('', '_blank', 'width=2000,height=3000');
-        
-        if (printWindow) {
-          // Insere o conteúdo do HTML no documento da nova janela
-          printWindow.document.open();
-          printWindow.document.write(htmlContent);
-          printWindow.document.close();
-
-          // Aguarda o carregamento do conteúdo e chama a função de impressão
-          printWindow.onload = () => {
-            printWindow.print();
-            printWindow.close();
-          };
-        }
-      } else {
-        console.error('Falha ao gerar o HTML do currículo');
-      }
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      const currentDate = new Date().toISOString().split('T')[0];
+      link.download = `AlanAugusto_Curriculo_${currentDate}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Erro ao tentar baixar o currículo:', error);
+      console.error('Erro ao baixar o currículo:', error);
+    } finally {
+      setIsLoading(false); // Finaliza o carregamento
     }
   };
 
@@ -37,7 +36,11 @@ const DownloadButton: React.FC = () => {
       onClick={handleDownload}
       className="fixed bottom-8 right-4 transition-transform duration-500 ease-in-out transform hover:scale-110 rounded-full"
     >
-      <LuFileDown />
+      {isLoading ? (
+        <ImSpinner2 className="animate-spin" />
+      ) : (
+        <LuFileDown />
+      )}
     </Button>
   );
 };

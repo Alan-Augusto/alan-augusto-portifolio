@@ -1,151 +1,121 @@
+import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import { NextResponse } from 'next/server';
 import { experiences } from '@/data/experiences.data';
 import { profileData } from '@/data/profile.data';
 import { studentData, extracurricularData } from '@/data/students.data';
 
+const PAGE_HEIGHT = 842; // Altura da página A4 em pontos
+const PAGE_WIDTH = 595; // Largura da página A4 em pontos
+const MARGIN = 50; // Margem da página
+const TEXT_SIZE = 12; // Tamanho da fonte para texto normal
+const PAGE_LIMIT_Y = PAGE_HEIGHT - MARGIN; // Limite inferior da página (margem superior + altura do conteúdo)
 
 export async function GET() {
   try {
-    // Função para formatar texto como HTML
-  const formatText = (text: string) => text.replace(/\n/g, '<br/>');
+    const pdfDoc = await PDFDocument.create();
+    let page = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
+    const { width, height } = page.getSize();
 
-  // Conteúdo HTML do currículo
-  const htmlContent = `
-    <!DOCTYPE html>
-    <html lang="pt-BR">
-    <head>
-      <meta charset="UTF-8">
-      <title>Currículo - ${profileData.name}</title>
-      <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        body {
-          font-family: Arial, sans-serif;
-          line-height: 1.6;
-          max-width: 800px;
-          
-          margin: 0 auto;
-          padding: 20px;
-          color: #333;
-        }
-        .header {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 30px;
-          border-bottom: 2px solid #333;
-          padding-bottom: 10px;
-        }
-        .header-info h1 {
-          font-size: 24px;
-          margin-bottom: 5px;
-        }
-        .header-info p {
-          font-size: 14px;
-          color: #666;
-        }
-        .profile-pic {
-          width: 120px;
-          height: 120px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 3px solid #333;
-        }
-        .section {
-          margin-bottom: 20px;
-        }
-        .section h2 {
-          border-bottom: 1px solid #ccc;
-          padding-bottom: 5px;
-          margin-bottom: 10px;
-          font-size: 18px;
-        }
-        .experience, .education, .extracurricular {
-          margin-bottom: 15px;
-        }
-        .experience h3, .education h3, .extracurricular h3 {
-          font-size: 16px;
-        }
-        .experience p, .education p, .extracurricular p {
-          font-size: 14px;
-          color: #666;
-          margin-bottom: 5px;
-        }
-        .skills {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 5px;
-        }
-        .skills span {
-          background-color: #f0f0f0;
-          padding: 3px 8px;
-          border-radius: 3px;
-          font-size: 12px;
-        }
-      </style>
-    </head>
-    <body>
-      <div class="header">
-        <div class="header-info">
-          <h1>${profileData.name}</h1>
-          <p>${profileData.role}</p>
-          <p>${profileData.presentation}</p>
-        </div>
-        <img src="${profileData.image}" alt="Foto de Perfil" class="profile-pic">
-      </div>
+    const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontBold = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
 
-      <div class="section skills">
-        <h2>Habilidades</h2>
-        ${profileData.stack.map(skill => `<span>${skill}</span>`).join('')}
-      </div>
+    const textColor = rgb(0.2, 0.2, 0.2);
+    let cursorY = height - MARGIN + width - width;
 
-      <div class="section experiences">
-        <h2>Experiência Profissional</h2>
-        ${experiences.map(exp => `
-          <div class="experience">
-            <h3>${exp.position} - ${exp.title}</h3>
-            <p>${exp.startdate} - ${exp.enddate}</p>
-            <p>${formatText(exp.description)}</p>
-          </div>
-        `).join('')}
-      </div>
+    // Função para adicionar texto com quebra de linha automática
+    interface TextOptions {
+      x?: number;
+      y?: number;
+      size?: number;
+      bold?: boolean;
+    }
 
-      <div class="section education">
-        <h2>Educação</h2>
-        ${studentData.map(edu => `
-          <div class="education">
-            <h3>${edu.title} - ${edu.institution}</h3>
-            <p>${edu.startDate} - ${edu.endDate}</p>
-            <p>${formatText(edu.description)}</p>
-          </div>
-        `).join('')}
-      </div>
+    const drawText = (text: string, options: TextOptions = {}) => {
+      const { x = MARGIN, y = cursorY, size = TEXT_SIZE, bold = false } = options;
+      const selectedFont = bold ? fontBold : font;
+      const textWidth = selectedFont.widthOfTextAtSize(text, size);
 
-      <div class="section extracurricular">
-        <h2>Atividades Extracurriculares</h2>
-        ${extracurricularData.map(extra => `
-          <div class="extracurricular">
-            <h3>${extra.title} - ${extra.institution}</h3>
-            <p>${formatText(extra.description)}</p>
-            <p><strong>Tópicos:</strong> ${extra.items.join(', ')}</p>
-          </div>
-        `).join('')}
-      </div>
-    </body>
-    </html>
-  `;
+      // Se o texto exceder a largura da página, quebra em várias linhas
+      if (textWidth > PAGE_WIDTH - 2 * MARGIN) {
+        const words = text.split(' ');
+        let currentLine = '';
+        let currentY = y;
 
-    return new NextResponse(htmlContent, {
+        words.forEach(word => {
+          const lineWidth = selectedFont.widthOfTextAtSize(currentLine + ' ' + word, size);
+          if (lineWidth > PAGE_WIDTH - 2 * MARGIN) {
+            page.drawText(currentLine, { x, y: currentY, size, font: selectedFont, color: textColor });
+            currentY -= size + 5;
+            currentLine = word;
+          } else {
+            currentLine += (currentLine ? ' ' : '') + word;
+          }
+        });
+
+        if (currentLine) {
+          page.drawText(currentLine, { x, y: currentY, size, font: selectedFont, color: textColor });
+        }
+        cursorY = currentY - (size + 5);
+      } else {
+        page.drawText(text, { x, y, size, font: selectedFont, color: textColor });
+        cursorY -= size + 5;
+      }
+
+      // Se o cursorY estiver próximo do final da página, cria uma nova página
+      if (cursorY <= MARGIN + 40) {
+        const newPage = pdfDoc.addPage([PAGE_WIDTH, PAGE_HEIGHT]);
+        page = newPage;
+        cursorY = PAGE_LIMIT_Y; // Reinicia a posição de Y na nova página
+      }
+    };
+
+    const drawSection = (title: string) => {
+      cursorY -= 20; // Espaçamento antes da seção
+      drawText(title, { size: 14, bold: true });
+    };
+
+    // Cabeçalho
+    drawText(profileData.name, { size: 20, bold: true });
+    drawText(profileData.role, { size: 14 });
+    drawText(profileData.presentation, { size: 12 });
+    cursorY -= 10;
+    drawText(profileData.stack.join(', '), { size: 10 });
+
+    // Experiências
+    drawSection('Experiência Profissional');
+    experiences.forEach(exp => {
+      drawText(`${exp.position} - ${exp.title}`, { bold: true });
+      drawText(`${exp.startdate} - ${exp.enddate}`);
+      drawText(exp.description);
+    });
+
+    // Educação
+    drawSection('Educação');
+    studentData.forEach(edu => {
+      drawText(`${edu.title} - ${edu.institution}`, { bold: true });
+      drawText(`${edu.startDate} - ${edu.endDate}`);
+      drawText(edu.description);
+    });
+
+    // Atividades Extracurriculares
+    drawSection('Atividades Extracurriculares');
+    extracurricularData.forEach(extra => {
+      drawText(`${extra.title} - ${extra.institution}`, { bold: true });
+      drawText(extra.description);
+      drawText(`Tópicos: ${extra.items.join(', ')}`);
+    });
+
+    const pdfBytes = await pdfDoc.save();
+
+    return new NextResponse(pdfBytes, {
       headers: {
-        'Content-Type': 'text/html',
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': 'attachment; filename="curriculo.pdf"',
       },
     });
   } catch (error) {
-    console.error('Erro ao gerar o currículo:', error);
-    return new NextResponse(JSON.stringify({ error: 'Falha ao gerar o currículo' }), {
+    console.error('Erro ao gerar o PDF:', error);
+    return new NextResponse(JSON.stringify({ error: 'Falha ao gerar o PDF' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
