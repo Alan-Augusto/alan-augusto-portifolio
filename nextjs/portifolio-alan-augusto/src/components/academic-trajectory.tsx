@@ -15,7 +15,7 @@ const AcademicTrajectory = () => {
     // };
 
     return (
-        <Card className="p-10 w-full md:w-2/5 mx-auto transition-all duration-300 ease-in-out border-none shadow-none bg-transparent">
+        <Card className="py-10 w-full w-auto md:w-4/5 xl:w-3/5 mx-auto transition-all duration-300 ease-in-out border-none shadow-none bg-transparent">
             <h2 className="text-2xl font-bold">👨🏼‍🎓 Meus estudos</h2>
             <h3 className="text-lg font-normal mb-5">Conheça um pouco da minha trajetória acadêmica e minha capacitações.</h3>
             {/* <Button onClick={toggleVisibility} className="mb-4 flex items-center justify-between w-full" variant="outline">
